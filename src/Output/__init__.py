@@ -1,0 +1,2 @@
+from output import outputStatistics
+from output import outputWordCount
