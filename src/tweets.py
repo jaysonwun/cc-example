@@ -56,8 +56,8 @@ class Tweets(object):
         """
         self.writer.write("{0:.2f} \n".format(self.med.get()))
 
-    def get_words(self):
-        """Method to get counts of words from a tweet
+    def get_unique_words(self):
+        """Method to get counts of unique words from a tweet
 
         Returns:
             True if successful, False otherwise.

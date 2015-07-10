@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print "Starting words_tweeted.py..."
     mytweet = tweets.Tweets(infile, outfile)
     while mytweet.read_tweet():
-        mytweet.get_words()
+        mytweet.get_unique_words()
     mytweet.write_dictionary()
     mytweet.close()
     print ("Output is saved to %s ") % (outfile)
