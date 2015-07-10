@@ -1,14 +1,20 @@
-# Program that will read all tweet files from Input directory, and output the count of the words in the Output directory.
-
-import Input
-import Statistics
-import Output
 from sys import argv
+import time
+import tweets
+# Program that calculates the total number of times each word has been tweeted.
+# Author: Jason Keung
+# Created: July 4, 2015
 
-script, directory, output = argv					#Assign arguments
 
-x = Input.inputDirectory(directory)					#Read in input from directory and get list of tweets
-y = Statistics.wordCount(x)							#Run word count and get dictionary of words 
-#y = Statistics.wordCount(x,".?,;"					#ADDITIONAL FEATURE: add additional paramater to filter character(s) from tweets
-Output.outputWordCount(y, output)					#Write dictionary of words to file
-print ("words_tweeted.py run successfully!")
+if __name__ == "__main__":
+    script, infile, outfile = argv
+    start_time = time.time()
+    print "Starting words_tweeted.py..."
+    mytweet = tweets.Tweets(infile, outfile)
+    while mytweet.read_tweet():
+        mytweet.get_words()
+    mytweet.write_dictionary()
+    mytweet.close()
+    print ("Output is saved to %s ") % (outfile)
+    print "words_tweeted.py run successfully!"
+    print ("--- %s seconds ---\n") % (time.time() - start_time)
