@@ -1,5 +1,5 @@
 import heapq as hq      # for process heaps
-# Program that creates a class for tweets
+# Program that creates a class for Tweets and RunningMedian
 # Author: Jason Keung
 # Created: July 4, 2015
 
