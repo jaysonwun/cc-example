@@ -50,12 +50,6 @@ class Tweets(object):
         self.med.add(median)
         self.write_median()
 
-    def write_median(self):
-        """Method to write a running median to output file
-
-        """
-        self.writer.write("{0:.2f} \n".format(self.med.get()))
-
     def get_unique_words(self):
         """Method to get counts of unique words from a tweet
 
@@ -68,6 +62,13 @@ class Tweets(object):
                 self.D[word.lower()] += 1
             else:
                 self.D[word.lower()] = 1
+
+    def write_median(self):
+        """Method to write a running median to output file
+
+        """
+        self.writer.write("{0:.2f} \n".format(self.med.get()))
+
 
     def write_dictionary(self):
         """Method to write word dictionary to file
