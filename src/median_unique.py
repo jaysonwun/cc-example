@@ -121,7 +121,7 @@ if __name__ == "__main__":
     mytweet = tweets.Tweets(infile, outfile)
     print ("Starting median_unique.py...")
     while mytweet.read_tweet():
-        mytweet.get_unique_words()
+        mytweet.get_num_unique_words()
     mytweet.close()
     print ("Output is saved to %s ") % (outfile)
     print ("median_unique.py run successfully!")

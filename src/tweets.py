@@ -42,7 +42,7 @@ class Tweets(object):
         else:
             return False
 
-    def get_unique_words(self):
+    def get_num_unique_words(self):
         """Method to get number of unique words from a tweet
 
         """
