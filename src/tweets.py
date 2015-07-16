@@ -52,9 +52,6 @@ class Tweets(object):
     def get_unique_words(self):
         """Method to get counts of unique words from a tweet
 
-        Returns:
-            True if successful, False otherwise.
-
         """
         for word in self.tweet.split():
             if word in self.D:
