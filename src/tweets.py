@@ -80,7 +80,7 @@ class Tweets(object):
 
 
 class RunningMedian(object):
-    """Defines a class for tweets
+    """Defines a class for RunningMedian
 
         Attributes:
             minheap (list): The min heap that will contain the higher numbers.

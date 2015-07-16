@@ -17,4 +17,4 @@ if __name__ == "__main__":
     mytweet.close()
     print ("Output is saved to %s ") % (outfile)
     print ("median_unique.py run successfully!")
-    print ("--- %s seconds ---*\n") % (time.time() - start_time)
+    print ("--- %s seconds ---\n") % (time.time() - start_time)
