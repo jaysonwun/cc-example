@@ -80,9 +80,8 @@ class RunningMedian(object):
         Attributes:
             minheap (list): The min heap that will contain the higher numbers.
             maxheap (list): The max heap that will contain the lower numbers.
-            condition (str): Condition that will specify which heap has more
-                elements. Possible condition values include: even, maxplus1,
-                maxgreater, minplus1, or mingreater.
+            even (boolean): Condition that will specify which heap has more
+                elements. 
 
     """
 
@@ -142,7 +141,7 @@ class RunningMedian(object):
         self.minheap = hq.nsmallest(3, self.minheap)
 
     def get(self):
-        """Method to calculate median based on condition, maxheap, and minheap.
+        """Method to calculate median based on "even" condition.
         if the heaps contain equal elements;
         median = (root of maxHeap + root of minHeap)/2
         else
