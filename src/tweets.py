@@ -15,7 +15,6 @@ class Tweets(object):
             reader (file): The input file
             writer (file): The output file
             tweet (str): List use for storing a tweet
-            index (int): The counter for line
             med (RunningMedian): The running median class
             D (dict): The dictionary used for storing unique words_tweeted
 
@@ -25,7 +24,6 @@ class Tweets(object):
         self.reader = open(infile, 'r')
         self.writer = open(outfile, 'w')
         self.tweet = None
-        self.index = 0
         self.med = RunningMedian()
         self.D = {}
 
@@ -82,7 +80,6 @@ class RunningMedian(object):
         Attributes:
             minheap (list): The min heap that will contain the higher numbers.
             maxheap (list): The max heap that will contain the lower numbers.
-            index (int): The index to track line number.
             condition (str): Condition that will specify which heap has more
                 elements. Possible condition values include: even, maxplus1,
                 maxgreater, minplus1, or mingreater.
@@ -92,14 +89,13 @@ class RunningMedian(object):
     def __init__(self):
         self.minheap = []
         self.maxheap = []
-        self.index = 0
-        self.condition = "even"
+        self.even = True
 
     def add(self, val):
         """Method to add a running median to minheap or maxheap. Initializes
         minheap to larger of first two numbers. Intializes maxheap to the
-        smaller of the first two numbers. A maxheap will be represented by negative numbers.
-        The following algorithm will be used:
+        smaller of the first two numbers. A maxheap will be represented by
+        negative numbers. The following algorithm will be used:
 
         Step 1: Add next item to one of the heaps
         if next item is smaller than maxHeap root add it to maxHeap,
@@ -117,50 +113,33 @@ class RunningMedian(object):
 
         """
 
-        if self.index == 0:
-            # add first value to both heaps
-            hq.heappush(self.minheap, val)
-            hq.heappush(self.maxheap, -1 * val)
-
-        elif self.index == 1:
-            # add second value to both heaps
-            hq.heappush(self.minheap, val)
-            hq.heappush(self.maxheap, -1 * val)
-            # keep the smallest value in maxheap and largest value in minheap
-            self.maxheap = hq.nlargest(1, self.maxheap)
-            self.minheap = hq.nlargest(1, self.minheap)
+        if self.even:
+            # to intiailize if maxheap is empty
+            if not self.maxheap:
+                hq.heappush(self.maxheap, val * -1)
+            # push to minheap and then allow maxheap to have more elements
+            elif val > self.maxheap[0] * -1:
+                x = hq.heappushpop(self.minheap, val)
+                hq.heappush(self.maxheap, x * -1)
+            # just push to maxheap
+            else:
+                hq.heappush(self.maxheap, val * -1)
+            # set even condition to False, maxheap has 1 additional element
+            self.even = False
 
         else:
-            # add next item to one of the heaps
-            if val < -1 * self.maxheap[0] and self.condition == "even":
-                hq.heappush(self.maxheap, -1 * val)
-                self.condition = "maxplus1"
-            elif val < -1 * self.maxheap[0] and self.condition == "maxplus1":
-                hq.heappush(self.maxheap, -1 * val)
-                self.condition = "maxgreater"
-            elif val >= -1 * self.maxheap[0] and self.condition == "even":
+            # push to minheap
+            if val > self.maxheap[0] * -1:
                 hq.heappush(self.minheap, val)
-                self.condition = "minplus1"
-            elif val >= -1 * self.maxheap[0] and self.condition == "minplus1":
-                hq.heappush(self.minheap, val)
-                self.condition = "mingreater"
+            # push to maxheap then balance to minheap
             else:
-                pass
-
-            # now balance the heaps
-            if self.condition == "maxgreater":
-                hq.heappush(self.minheap, -1 * hq.heappop(self.maxheap))
-                self.condition = "even"
-            elif self.condition == "mingreater":
-                hq.heappush(self.maxheap, -1 * hq.heappop(self.minheap))
-                self.condition = "even"
-            else:
-                pass
-
-            # only keep 3 values stored in the heap for memory purposes
-            self.maxheap = hq.nsmallest(3, self.maxheap)
-            self.minheap = hq.nsmallest(3, self.minheap)
-        self.index += 1
+                x = hq.heappushpop(self.maxheap, val * -1)
+                hq.heappush(self.minheap, x * -1)
+            # maxheap has same number elements as minheap
+            self.even = True
+        # only keep 3 values stored in the heap for memory purposes
+        self.maxheap = hq.nsmallest(3, self.maxheap)
+        self.minheap = hq.nsmallest(3, self.minheap)
 
     def get(self):
         """Method to calculate median based on condition, maxheap, and minheap.
@@ -175,11 +154,7 @@ class RunningMedian(object):
 
         """
 
-        if self.condition == "even":
-            return (-1 * min(self.maxheap) + min(self.minheap)) / 2.
-        elif self.condition == "maxplus1":
-            return -1 * min(self.maxheap)
-        elif self.condition == "minplus1":
-            return min(self.minheap)
+        if self.even:
+            return (min(self.maxheap) * -1 + min(self.minheap)) / 2.
         else:
-            pass
+            return min(self.maxheap) * -1
