@@ -63,7 +63,7 @@ class Tweets(object):
         """Method to write a running median to output file
 
         """
-        self.writer.write("{0:.2f} \n".format(self.med.get()))
+        self.writer.write("{0:.1f} \n".format(self.med.get()))
 
     def write_dictionary(self):
         """Method to write word dictionary to file
