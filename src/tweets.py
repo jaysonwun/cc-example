@@ -98,7 +98,8 @@ class RunningMedian(object):
     def add(self, val):
         """Method to add a running median to minheap or maxheap. Initializes
         minheap to larger of first two numbers. Intializes maxheap to the
-        smaller of the first two numbers. The follow the following algorithm:
+        smaller of the first two numbers. A maxheap will be represented by negative numbers.
+        The following algorithm will be used:
 
         Step 1: Add next item to one of the heaps
         if next item is smaller than maxHeap root add it to maxHeap,
