@@ -91,10 +91,9 @@ class RunningMedian(object):
         self.even = True
 
     def add(self, val):
-        """Method to add a running median to minheap or maxheap. Initializes
-        minheap to larger of first two numbers. Intializes maxheap to the
-        smaller of the first two numbers. A maxheap will be represented by
-        negative numbers. The following algorithm will be used:
+        """Method to add a running median to minheap or maxheap. 
+        A maxheap will be represented by negative numbers. 
+        The following algorithm will be used:
 
         Step 1: Add next item to one of the heaps
         if next item is smaller than maxHeap root add it to maxHeap,
@@ -114,26 +113,26 @@ class RunningMedian(object):
 
         if self.even:
             # to intiailize if maxheap is empty
-            if not self.maxheap:
+            if len(self.maxheap) == 0:
                 hq.heappush(self.maxheap, val * -1)
-            # push to minheap and then allow maxheap to have more elements
-            elif val > self.maxheap[0] * -1:
-                x = hq.heappushpop(self.minheap, val)
-                hq.heappush(self.maxheap, x * -1)
-            # just push to maxheap
+            # if value is less than root of maxheap push to maxheap
+            elif val < self.maxheap[0] * -1:
+                hq.heappush(self.maxheap, val * -1)
+            # push to minheap and then force maxheap to have more elements
             else:
-                hq.heappush(self.maxheap, val * -1)
+                temp = hq.heappushpop(self.minheap, val)
+                hq.heappush(self.maxheap, temp * -1)
             # set even condition to False, maxheap has 1 additional element
             self.even = False
 
         else:
-            # push to minheap
-            if val > self.maxheap[0] * -1:
-                hq.heappush(self.minheap, val)
             # push to maxheap then balance to minheap
+            if val < self.maxheap[0] * -1:
+                temp = hq.heappushpop(self.maxheap, val * -1)
+                hq.heappush(self.minheap, temp * -1)
+            # push to minheap
             else:
-                x = hq.heappushpop(self.maxheap, val * -1)
-                hq.heappush(self.minheap, x * -1)
+                hq.heappush(self.minheap, val)
             # maxheap has same number elements as minheap
             self.even = True
         # only keep 3 values stored in the heap for memory purposes
