@@ -120,6 +120,6 @@ Output will be saved to the ./tweet_output/ directory
 
 ## Code Refactor History
 
-### Code Updated 7/22/2015
+### Updated 7/22/2015
 
 Updated RunningMedian class in tweets.py to use a boolean condition called 'even' to determine if the heaps are equal in size. The previous method used was to have a state for maxheap greater, maxheap 1 greater than minheap, even, minheap greater, minheap 1 greater than maxheap. Additionally, updated documentation and comments throughout tweets.py.
