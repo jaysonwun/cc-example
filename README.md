@@ -1,4 +1,4 @@
-Insight Data Engineering - Coding Challenge
+Insight Data Engineering - Coding Challenge by Jason Keung
 ===========================================================
 
 ## Challenge Summary
@@ -56,11 +56,11 @@ The first feature would produce the following total count for each word:
 
 Note that the output of the first feature is outputted in order, according to the [ASCII Code](http://www.ascii-code.com).   
 
-For the second feature, the number of unique words in each tweet is 11, 14, and 17 (since the words 'is', 'big', and 'for' appear twice in the third tweet).  This means that the set of unique words per tweet is {11} after the first tweet arrives, is {11, 14} after the second tweet arrives, and is {11, 14, 17} after all three tweets arrive.  The output of the running median will display as a double with only 2 digits after the decimal.  Thus, the second feature would produce the following output:
+For the second feature, the number of unique words in each tweet is 11, 14, and 17 (since the words 'is', 'big', and 'for' appear twice in the third tweet).  This means that the set of unique words per tweet is {11} after the first tweet arrives, is {11, 14} after the second tweet arrives, and is {11, 14, 17} after all three tweets arrive.  The output of the running median will display as a double with only 1 digit after the decimal.  Thus, the second feature would produce the following output:
 
-	11.00
-	12.50
-	14.00
+	11.0
+	12.5
+	14.0
 
 ## Assumptions
 
@@ -84,9 +84,9 @@ For the second feature, the number of unique words in each tweet is 11, 14, and 
 
 ## Python Libraries Used
 	
-	- sys
-	- heapq
-	- time
+	- sys - This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.
+	- heapq - This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.
+	- time - This module provides various time-related functions.
 
 ## Instructions
 
@@ -117,3 +117,9 @@ Mac:
 	$ python median_unique.py ../tweet_input/tweets.txt ../tweet_output/ft2.txt
 
 Output will be saved to the ./tweet_output/ directory
+
+## Code Refactor History
+
+### Code Updated 7/22/2015
+
+Updated RunningMedian class in tweets.py to use a boolean condition called 'even' to determine if the heaps are equal in size. The previous method used was to have a state for maxheap greater, maxheap 1 greater than minheap, even, minheap greater, minheap 1 greater than maxheap. Additionally, updated documentation and comments throughout tweets.py.
