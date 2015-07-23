@@ -84,9 +84,9 @@ For the second feature, the number of unique words in each tweet is 11, 14, and 
 
 ## Python Libraries Used
 	
-	- sys - This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.
-	- heapq - This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.
-	- time - This module provides various time-related functions.
+	- dsys : This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.
+	- heapq : This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.
+	- time : This module provides various time-related functions.
 
 ## Instructions
 
