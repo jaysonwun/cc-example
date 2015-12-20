@@ -92,7 +92,7 @@ For the second feature, the number of unique words in each tweet is 11, 14, and 
 
 ### Checkout Code
 
-	$ git clone https://github.com/jaysonwun/cc-example.git
+	$ git clone https://github.com/jkeung/cc-example.git
 
 ### Run words_tweeted.py and median_unique.py From Root Directory 
 
